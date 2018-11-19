@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Bienvenido a Frick {% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'photos_home' %}">Home</a></li>
+        </ul>
+        {% if user.is_authenticated %}
+            <ul>
+                <li><a href="{% url 'users_logout' %}">Salir</a></li>
+            </ul>
+        {% else %}
+            <ul>
+                 <li><a href="{% url 'users_login' %}">Entrar</a></li>
+            </ul>
+        {% endif %}
+
+    </nav>
+
+    <section>
+        {% block section %} {% endblock %}
+    </section>
+    <br />
+
+    <footer>
+        <small>Frikr Inc &copy;</small>
+    </footer>
+
+</body>
+</html>
