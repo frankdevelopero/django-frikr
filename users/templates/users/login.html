@@ -4,24 +4,29 @@
 
 {% block section %}
 
-{% for error in errors %}
-    <p>{{ error }}</p>
-{% endfor %}
+    {% for error in errors %}
+        <p>{{ error }}</p>
+    {% endfor %}
 
-<form action="" method="post">
-    {% csrf_token %}
-    <div>
-        <input type="text" name="usr" placeholder="Usuario">
+    <div class="row">
+        <form class="col s6" action="" method="post">
+            <div class="row">
+                {% csrf_token %}
+                <input placeholder="Usuario" name="usr" id="first_name" type="text" class="validate">
+
+                <div>
+                    <input type="password" name="pwd" placeholder="Contraseña">
+                </div>
+
+                <div>
+                  <button class="btn waves-effect waves-light s12" type="submit" name="action">Entrar
+                  </button>
+                </div>
+            </div>
+
+
+        </form>
     </div>
 
-    <div>
-        <input type="password" name="pwd" placeholder="Contraseña">
-    </div>
-
-    <div>
-        <button>Entrar</button>
-    </div>
-
-</form>
 
 {% endblock %}

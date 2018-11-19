@@ -2,6 +2,11 @@
 
 {% block title %}{{ photo.name }}{% endblock %}}
 
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'photos/home.css' %}">
+{% endblock%}
+
 {% block section %}
     <h1>{{ photo.name }}</h1>
     <img src="{{ photo.url }}" alt="{{ photo.name }}" width="300">

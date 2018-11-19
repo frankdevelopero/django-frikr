@@ -1,25 +1,28 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %} Bienvenido a Frick {% endblock %}</title>
+    <title>{% block title %} Bienvenido a Frikr {% endblock %}</title>
+    <link rel="stylesheet" href="{% static '/css/materialize.min.css' %}">
+    <link rel="stylesheet" href="{% static '/css/base.css' %}">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="{% url 'photos_home' %}">Home</a></li>
-        </ul>
-        {% if user.is_authenticated %}
-            <ul>
-                <li><a href="{% url 'users_logout' %}">Salir</a></li>
-            </ul>
-        {% else %}
-            <ul>
-                 <li><a href="{% url 'users_login' %}">Entrar</a></li>
-            </ul>
-        {% endif %}
 
+    <nav>
+        <div class="nav-wrapper blue-grey darken-3">
+            <a href="{% url 'photos_home' %}" class="brand-logo">Frikr</a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="{% url 'photos_home' %}">Inicio</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'users_logout' %}">Salir</a></li>
+                {% else %}
+                    <li><a href="{% url 'users_login' %}" >Entrar</a></li>
+                {% endif %}
+            </ul>
+        </div>
     </nav>
+
 
     <section>
         {% block section %} {% endblock %}

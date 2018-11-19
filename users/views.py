@@ -14,7 +14,7 @@ def login(request):
         user = authenticate(username=username, password=password)
 
         if user is None:
-            error_messages.append('Usuario y/ contraseña incorrecta')
+            error_messages.append('Usuario y/o contraseña incorrecta')
         else:
             if user.is_active:
                 django_login(request, user)
