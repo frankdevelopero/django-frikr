@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %} Bienvenido a Frikr {% endblock %}</title>
-    <link rel="stylesheet" href="{% static '/css/materialize.min.css' %}">
+    <!--<link rel="stylesheet" href="{% static '/css/materialize.min.css' %}">-->
     <link rel="stylesheet" href="{% static '/css/base.css' %}">
 </head>
 <body>
@@ -16,6 +16,7 @@
                 <li><a href="{% url 'photos_home' %}">Inicio</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'users_logout' %}">Salir</a></li>
+                    <li><a href="{% url 'create_photo' %}">Crear Foto</a></li>
                 {% else %}
                     <li><a href="{% url 'users_login' %}" >Entrar</a></li>
                 {% endif %}

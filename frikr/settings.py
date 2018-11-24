@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'photos',
     'frikr',
-    'users'
+    'users',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -115,3 +116,23 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#
+LOGIN_URL = '/login' # Cuando un usuario no esta logueado redirige a login
+LICENSES = (
+    ('FAB', 'Facebook'),
+    ('YOU', 'Youtube'),
+    ('GOO', 'Google')
+)
+
+PROJECT_BADWORDS = [  # en python 2 convertir todas las strings a unicode agregarndo u: u'Abollado'
+    'Abollao',
+    'Abrazafarolas',
+    'Afilasables',
+    'Analfabestia',
+    'Apollardao',
+    'Arrastramantas',
+    'Limpiatubos',
+    'Mamahostias',
+    'Putapénico',
+]

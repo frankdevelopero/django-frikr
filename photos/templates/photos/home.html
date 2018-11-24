@@ -6,7 +6,7 @@
     <p>Frikr es como Flickr pero en Frike</p>
 
     {% if photos_list|length > 0 %}
-        <h2>Última fotos publicadas</h2>
+        <h2>Últimas fotos publicadas</h2>
         {% for photo in photos_list %}
             <a href="{% url 'photos_detail' photo.pk %}">
                 <img src="{{ photo.url }}" alt="{{photo.name}}" height="150px">

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Crear una foto{% endblock %}}
+
+{% block section %}
+
+<h1>Crear una foto</h1>
+
+{% if succes_message %}
+    <span style="color: #0f9d58">{{ succes_message|safe }}</span>
+{% endif %}
+
+<form METHOD="post">
+
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <div>
+        <button class="btn waves-effect waves-light s12" type="submit" name="action">
+            Crear Foto
+        </button>
+    </div>
+
+</form>
+
+
+{% endblock %}
