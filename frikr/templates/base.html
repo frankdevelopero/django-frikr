@@ -14,9 +14,11 @@
             <a href="{% url 'photos_home' %}" class="brand-logo">Frikr</a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="{% url 'photos_home' %}">Inicio</a></li>
+                <li><a href="{% url 'photos_list' %}">Fotos</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'users_logout' %}">Salir</a></li>
+                    <li><a href="{% url 'user_photos' %}">Mis fotos</a></li>
                     <li><a href="{% url 'create_photo' %}">Crear Foto</a></li>
+                    <li><a href="{% url 'users_logout' %}">Salir</a></li>
                 {% else %}
                     <li><a href="{% url 'users_login' %}" >Entrar</a></li>
                 {% endif %}

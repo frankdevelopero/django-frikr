@@ -2,15 +2,28 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout as django_logout, authenticate, login as django_login
 from users.forms import LoginForm
+from django.views.generic import View
 
 
 # Create your views here.
 
 
-def login(request):
-    error_messages = []
+class LoginView(View):
 
-    if request.method == 'POST':
+    def get(self, request):
+        error_messages = []
+        form = LoginForm()
+
+        contexto = {
+            "errors": error_messages,
+            "login_form": form
+
+        }
+
+        return render(request, 'users/login.html', contexto)
+
+    def post(self, request):
+        error_messages = []
         form = LoginForm(request.POST)
 
         if form.is_valid():
@@ -30,20 +43,18 @@ def login(request):
                 else:
                     error_messages.append("El usuario no esta activo")
 
-    else:
-        form = LoginForm()
+        contexto = {
+            "errors": error_messages,
+            "login_form": form
 
-    contexto = {
-        "errors": error_messages,
-        "login_form": form
+        }
 
-    }
-
-    return render(request, 'users/login.html', contexto)
+        return render(request, 'users/login.html', contexto)
 
 
-def logout(request):
-    if request.user.is_authenticated:
-        django_logout(request)
+class LogoutView(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            django_logout(request)
 
-    return redirect('photos_home')
+        return redirect('photos_home')
