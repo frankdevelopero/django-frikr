@@ -136,3 +136,10 @@ PROJECT_BADWORDS = [  # en python 2 convertir todas las strings a unicode agrega
     'Mamahostias',
     'Putapénico',
 ]
+
+
+# REST_FRAMEWORK SETTINGS
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 5
+}

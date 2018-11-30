@@ -1,20 +1,29 @@
 from django.contrib.auth.models import User
 from rest_framework.response import Response
-from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
-from rest_framework import  status
+from rest_framework import status
+from rest_framework.pagination import PageNumberPagination
+from rest_framework import viewsets
 
+from users.permissions import UserPermission
 from users.serializers import UserSerializer
 
 
-class UserListAPI(APIView):
+class UserViewSet(viewsets.ViewSet):
+    permission_classes = (UserPermission,)
 
-    def get(self, request):
+    def list(self, request):
+        paginator = PageNumberPagination()
         users = User.objects.all()
-        serializer = UserSerializer(users, many=True)  # Serializa estos objetos y guarda en atributo data
-        return Response(serializer.data)
 
-    def post(self, request):
+        # paginar el queryset
+        paginator.paginate_queryset(users, request)
+        serializer = UserSerializer(users, many=True)  # Serializa estos objetos y guarda en atributo data
+
+        # devolver la respuesta paginada
+        return paginator.get_paginated_response(serializer.data)
+
+    def create(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             new_user = serializer.save()
@@ -22,15 +31,12 @@ class UserListAPI(APIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-class UserDetailAPI(APIView):
-
-    def get(self, request, pk):
+    def retrieve(self, request, pk):
         user = get_object_or_404(User, pk=pk)  # si exite devuelve si no lanza una excepcion
         serializer = UserSerializer(user)
         return Response(serializer.data)
 
-    def put(self, request, pk):
+    def update(self, request, pk):
         user = get_object_or_404(User, pk=pk)
         serializer = UserSerializer(instance=user, data=request.data)
         if serializer.is_valid():
@@ -39,7 +45,7 @@ class UserDetailAPI(APIView):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk):
+    def destroy(self, request, pk):
         user = get_object_or_404(User, pk=pk)
         user.delete()
         json = {
